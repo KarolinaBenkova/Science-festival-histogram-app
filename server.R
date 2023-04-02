@@ -3,30 +3,6 @@ library(magrittr)
 library(readxl)
 # Modified from https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/
 
-ui <- shinyServer(fluidPage(
-  titlePanel("Heights of Edinburgh Science Festival participants"),
-  sidebarLayout(
-    sidebarPanel(
-      # Input: Slider for the number of bins ----
-      sliderInput(inputId = "bins",
-                  label = "Number of bins:",
-                  min = 1,
-                  max = 50,
-                  value = 30)
-    ),
-    mainPanel(
-      plotOutput(outputId = "adultPlot"),
-      plotOutput(outputId = "childrenPlot"),
-    )
-  ),
-  fluidRow(
-    column(3,
-       numericInput("num",
-                    h3("Numeric input"),
-                    value = 1))
-  )
-))
-
 server <- shinyServer(function(input, output, session){
   data_heights <<- read_excel("heights_data2.xlsx")
   update_data <- function(){
@@ -61,5 +37,3 @@ server <- shinyServer(function(input, output, session){
          main = "Histogram of children heights (0-15 years old)")
   })
 })
-
-shinyApp(ui=ui,server=server)
