@@ -18,26 +18,19 @@ ui <- shinyServer(fluidPage(
       plotOutput(outputId = "adultPlot"),
       plotOutput(outputId = "childrenPlot"),
     )
-  ),
-  fluidRow(
-    column(3,
-       numericInput("num",
-                    h3("Numeric input"),
-                    value = 1))
   )
 ))
 
 server <- shinyServer(function(input, output, session){
-  data_heights <<- read_excel("heights_data2.xlsx")
+  data_heights <<- read_excel("heights_data.xlsx")
   update_data <- function(){
-    data_heights <<- read_excel("heights_data2.xlsx")
+    data_heights <<- read_excel("heights_data.xlsx")
   }
   output$adultPlot <- renderPlot({
     print("Render")
     print(Sys.time())
-    invalidateLater(5000, session) # refresh every 5 sec
+    invalidateLater(10000, session) # refresh every 10 sec
     update_data()
-    # print(data_heights$adults[data_heights$adults>0])
     
     x    <- data_heights$adults
     x    <- na.omit(x) # ignore invalid entries
@@ -45,16 +38,17 @@ server <- shinyServer(function(input, output, session){
     bins <- seq(min(x), max(x), length.out = input$bins + 1)
     hist(x, breaks = bins, col = "#75AADB", border = "black",
          xlab = "Height [cm]",
-         main = "Histogram of adult heights (16 years old or older")
+         main = "Histogram of adult heights (>16 years old)")
   })
   
   output$childrenPlot <- renderPlot({
-    invalidateLater(5000, session) # refresh every 5 sec
+    invalidateLater(10000, session) # refresh every 10 sec
     update_data()
     
-    x    <- data_heights$children
+    x    <- as.numeric(data_heights$children)
     x    <- na.omit(x) # ignore invalid entries
     x    <- x[x>0] # ignore zero heights
+    print(x)
     bins <- seq(min(x), max(x), length.out = input$bins + 1)
     hist(x, breaks = bins, col = "#75AADB", border = "black",
          xlab = "Height [cm]",

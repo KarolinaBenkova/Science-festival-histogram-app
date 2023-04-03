@@ -1,9 +1,15 @@
 library(shiny)
-library(magrittr)
-library(readxl)
+# library(magrittr)
+# library(readxl)
 
 ui <- shinyServer(fluidPage(
   titlePanel("Heights of Edinburgh Science Festival participants"),
+  fluidRow(
+    column(3,
+           plotOutput('data_heights'),
+           actionButton(inputId = "reload", label = "Reload data")
+    )
+  ),
   sidebarLayout(
     sidebarPanel(
       # Input: Slider for the number of bins ----
