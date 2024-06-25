@@ -8,7 +8,7 @@ As the height of humans stabilises after reaching adulthood, we can divide the v
 
 ## Running on a server
 The app runs on a server so one only needs an internet connection and a browser to use.
-Open the Google Sheet used in the server.R file, e.g. heights_data_GS. The adults' data is initialised with the heights of team members at the last MOT meeting, the children's heights are arbitrary. 
+Open the Google Sheet used in the server.R file, e.g. [heights_data_GS](https://docs.google.com/spreadsheets/d/1TuGqU7fLzumpWgD-WyiQVLLULAmkZOzzGvZarbLyrek/edit?gid=1744621385#gid=1744621385). The adults' data is initialised with the heights of team members at the last MOT meeting, the children's heights are arbitrary. 
 The participants will have the option to report their height in feet+inches or cm. 
 View the histogram [here](https://7g87ms-karolina0benkova.shinyapps.io/science-festival-histogram-app/)
 
