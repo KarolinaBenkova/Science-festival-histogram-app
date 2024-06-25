@@ -17,22 +17,22 @@ server <- shinyServer(function(input, output, session){
   })
   
   output$adultPlot <- renderPlot({
-    x    <- data_heights()$adults
+    x    <- as.numeric(data_heights()$adults)
     x    <- na.omit(x) # ignore invalid entries
     x    <- x[x>0] # ignore zero heights
     bins <- seq(min(x), max(x), length.out = input$bins + 1)
     hist(x, breaks = bins, col = "#75AADB", border = "black",
          xlab = "Height [cm]",
-         main = "Histogram of adult heights (>16 years old)")
+         main = "Histogram of heights of adults (>16 years old)")
   })
 
   output$childrenPlot <- renderPlot({
-    x    <- data_heights()$children
+    x    <- as.numeric(data_heights()$children)
     x    <- na.omit(x) # ignore invalid entries
     x    <- x[x>0] # ignore zero heights
     bins <- seq(min(x), max(x), length.out = input$bins + 1)
     hist(x, breaks = bins, col = "#75AADB", border = "black",
          xlab = "Height [cm]",
-         main = "Histogram of children heights (0-15 years old)")
+         main = "Histogram of heights of children (0-15 years old)")
   })
 })

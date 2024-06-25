@@ -3,25 +3,26 @@ library(shiny)
 # library(readxl)
 
 ui <- shinyServer(fluidPage(
-  titlePanel("Heights of Edinburgh Science Festival participants"),
+  titlePanel("Are the visitors' heights normally distributed? Contribute with your height!"),
   fluidRow(
     column(3,
-           plotOutput('data_heights'),
            actionButton(inputId = "reload", label = "Reload data")
-    )
-  ),
-  sidebarLayout(
-    sidebarPanel(
-      # Input: Slider for the number of bins ----
-      sliderInput(inputId = "bins",
-                  label = "Number of bins:",
-                  min = 1,
-                  max = 50,
-                  value = 30)
     ),
+    column(5,
+           sliderInput(inputId = "bins",
+                       label = "Number of bins:",
+                       min = 1,
+                       max = 50,
+                       value = 30))
+  ),
     mainPanel(
-      plotOutput(outputId = "adultPlot"),
-      plotOutput(outputId = "childrenPlot"),
+      fluidRow(
+        splitLayout(
+          cellWidths = c("75%", "75%"),
+          plotOutput(outputId = "adultPlot"),
+          plotOutput(outputId = "childrenPlot"),
+        )
+      )
     )
-  )
+  # )
 ))
